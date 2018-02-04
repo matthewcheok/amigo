@@ -1,0 +1,23 @@
+type User {
+  id: ID! @unique
+  deviceToken: String
+  chat: Chat @relation(name: "UserChat")
+}
+
+type Message {
+  id: ID! @unique
+  sender: User!
+  chat: Chat! @relation(name: "ChatMessages")
+  text: String
+  prompt: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Chat {
+  id: ID! @unique
+  participants: [User!]! @relation(name: "UserChat")
+  messages: [Message!]! @relation(name: "ChatMessages")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

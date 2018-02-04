@@ -1,0 +1,18 @@
+# import Post from "./generated/prisma.graphql"
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User!
+  chat(id: ID!): Chat!
+}
+
+type Mutation {
+  createNewUser(deviceToken: String): User
+  createNewMessage(senderID: ID!, chatID: ID!, text: String!): Message
+  createActivity(senderID: ID!, chatID: ID!): Message
+}
+
+type Subscription {
+  user(id: ID!): UserSubscriptionPayload
+  chat(id: ID!): ChatSubscriptionPayload
+}

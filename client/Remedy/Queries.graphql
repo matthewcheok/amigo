@@ -1,0 +1,67 @@
+
+query GetUsers {
+  users {
+    id
+  }
+}
+
+query GetUser($id:ID!) {
+  user(id:$id){
+    id
+    chat{
+      id
+    }
+  }
+}
+
+query GetChat($id: ID!) {
+  chat(id: $id) {
+    id
+    participants{
+      id
+    }
+    messages{
+      id
+      text
+      prompt
+      createdAt
+      updatedAt
+      sender {
+        id
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+mutation CreateNewUser {
+  createNewUser(deviceToken: "hey") {
+    id
+    deviceToken
+    chat {
+      id
+    }
+  }
+}
+
+mutation CreateNewMessage(
+                          $senderID: ID!
+                          $chatID: ID!
+                          $text: String!
+                          ) {
+  createNewMessage(
+                   senderID: $senderID
+                   chatID:$chatID
+                   text: $text
+                   ) {
+    id
+    text
+    prompt
+    createdAt
+    updatedAt
+    sender {
+      id
+    }
+  }
+}
